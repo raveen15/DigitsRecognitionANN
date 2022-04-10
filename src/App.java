@@ -36,9 +36,9 @@ public class App {
     	// need to have number of weights corresponding to the previous layer
     	// which means that the first hidden layer need to have 2 weights per neuron and 6 neurons
     	layers = new Layer[3];
-    	layers[0] = null; // Input Layer 0,2
-    	layers[1] = new Layer(45,5); // Hidden Layer 2,6
-    	layers[2] = new Layer(5,10); // Output Layer 6,1
+    	layers[0] = null; // Input Layer 0,45
+    	layers[1] = new Layer(45,5); // Hidden Layer 45,5
+    	layers[2] = new Layer(5,10); // Output Layer 5,10
         
     	// Create the training data
     	CreateTrainingData();
@@ -66,29 +66,29 @@ public class App {
                 System.out.println(j + ": " + layers[2].neurons[j].value);
             }
         }
-        float[] inputZeroTest = {0,1,0,1,0,1,0,0,0,1,1,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1,1,0,0,0,1,1,0,0,1,1,0,1,1,1,0};
-        forward(inputZeroTest);
+        float[] inputZeroTestOne = {0,1,0,1,0,1,0,0,0,1,1,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1,1,0,0,0,1,1,0,0,1,1,0,1,1,1,0};
+        forward(inputZeroTestOne);
         System.out.println("\n===Zero Test With Noise===");
         for(int j = 0; j < 10; j++){
             System.out.println(j + ": " + layers[2].neurons[j].value);
         }
 
-        float[] inputOneTest = {0,0,1,1,0,0,0,1,0,0,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,1,0,0,0,0,1,0,0,0,0,1,1,0};
-        forward(inputOneTest);
+        float[] inputOneTestOne = {0,0,1,1,0,0,0,1,0,0,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,1,0,0,0,0,1,0,0,0,0,1,1,0};
+        forward(inputOneTestOne);
         System.out.println("===One Test With Noise===");
         for(int j = 0; j < 10; j++){
             System.out.println(j + ": " + layers[2].neurons[j].value);
         }
 
-        float[] inputTwoTest = {0,1,1,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,1,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,1,1};
-        forward(inputTwoTest);
+        float[] inputTwoTestOne = {0,1,1,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,1,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,1,1};
+        forward(inputTwoTestOne);
         System.out.println("===Two Test With Noise===");
         for(int j = 0; j < 10; j++){
             System.out.println(j + ": " + layers[2].neurons[j].value);
         }
 
-        float[] inputFourTest = {0,0,0,1,0,0,0,1,1,0,0,0,1,1,0,0,1,0,1,0,0,1,0,1,0,1,0,0,1,0,0,1,1,1,1,0,0,0,1,0,0,0,0,1,1};
-        forward(inputFourTest);
+        float[] inputFourTestOne = {0,0,0,1,0,0,0,1,1,0,0,0,1,1,0,0,1,0,1,0,0,1,0,1,0,1,0,0,1,0,0,1,1,1,1,0,0,0,1,0,0,0,0,1,1};
+        forward(inputFourTestOne);
         System.out.println("===Four Test With Noise===");
         for(int j = 0; j < 10; j++){
             System.out.println(j + ": " + layers[2].neurons[j].value);
