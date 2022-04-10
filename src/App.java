@@ -38,7 +38,7 @@ public class App {
     	layers = new Layer[3];
     	layers[0] = null; // Input Layer 0,2
     	layers[1] = new Layer(45,5); // Hidden Layer 2,6
-    	layers[2] = new Layer(5,9); // Output Layer 6,1
+    	layers[2] = new Layer(5,10); // Output Layer 6,1
         
     	// Create the training data
     	CreateTrainingData();
@@ -47,8 +47,12 @@ public class App {
         System.out.println("Output before training");
         System.out.println("============");
         for(int i = 0; i < tDataSet.length; i++) {
-            forward(tDataSet[i].data);
-            System.out.println(layers[2].neurons[0].value);
+            System.out.println("=====" + i + "======");
+            for(int j = 0; j < 10; j++){
+                forward(tDataSet[i].data);
+                System.out.println(j + ": " + layers[2].neurons[j].value);
+            }
+            
         }
        
         train(1000000, 0.05f);
@@ -57,131 +61,35 @@ public class App {
         System.out.println("Output after training");
         System.out.println("============");
         for(int i = 0; i < tDataSet.length; i++) {
-            forward(tDataSet[i].data);
-            System.out.println(layers[2].neurons[0].value);
+            System.out.println("=====" + i + "======");
+            for(int j = 0; j < 10; j++){
+                forward(tDataSet[i].data);
+                System.out.println(j + ": " + layers[2].neurons[j].value);
+            }
         }
+        float[] inputZeroTest = {0,1,0,1,0,1,0,0,0,1,1,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1,1,0,0,0,1,1,0,0,1,1,0,1,1,1,0};
     }
    
     public static void CreateTrainingData() {
-        float[][] input0 = {
-            {0,1,1,1,0},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {0,1,1,1,0}
-        };
+        float[] input0 = {0,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,0};
 
-        float[][] input1 = {
-            {0,0,1,0,0},
-            {0,1,1,0,0},
-            {1,0,1,0,0},
-            {0,0,1,0,0},
-            {0,0,1,0,0},
-            {0,0,1,0,0},
-            {0,0,1,0,0},
-            {0,0,1,0,0},
-            {0,0,1,0,0}
-        };
+        float[] input1 = {0,0,1,0,0,0,1,1,0,0,1,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0};
 
-        float[][] input2 = {
-            {0,1,1,1,0},
-            {1,0,0,0,1},
-            {0,0,0,0,1},
-            {0,0,0,0,1},
-            {0,0,0,1,0},
-            {0,0,1,0,0},
-            {0,1,0,0,0},
-            {1,0,0,0,0},
-            {1,1,1,1,1}
-        };
+        float[] input2 = {0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,1,1,1,1};
 
-        float[][] input3 = {
-            {0,1,1,1,0},
-            {1,0,0,0,1},
-            {0,0,0,0,1},
-            {0,0,0,0,1},
-            {0,0,0,1,0},
-            {0,0,0,0,1},
-            {0,0,0,0,1},
-            {1,0,0,0,1},
-            {0,1,1,1,0}
-        };
+        float[] input3 = {0,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,1,0,1,1,1,0};
 
-        float[][] input4 = {
-            {0,0,0,1,0},
-            {0,0,1,1,0},
-            {0,0,1,1,0},
-            {0,1,0,1,0},
-            {0,1,0,1,0},
-            {1,0,0,1,0},
-            {1,1,1,1,1},
-            {0,0,0,1,0},
-            {0,0,0,1,0}
-        };
+        float[] input4 = {0,0,0,1,0,0,0,1,1,0,0,0,1,1,0,0,1,0,1,0,0,1,0,1,0,1,0,0,1,0,1,1,1,1,1,0,0,0,1,0,0,0,0,1,0};
+        
+        float[] input5 = {1,1,1,1,1,1,0,0,0,0,1,0,0,0,0,1,1,1,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,1,0,1,1,1,0};
+        
+        float[] input6 = {0,1,1,1,0,1,0,0,0,1,1,0,0,0,0,1,0,0,0,0,1,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,0};
 
-        float[][] input5 = {
-            {1,1,1,1,1},
-            {1,0,0,0,0},
-            {1,0,0,0,0},
-            {1,1,1,1,0},
-            {1,0,0,0,1},
-            {0,0,0,0,1},
-            {0,0,0,0,1},
-            {1,0,0,0,1},
-            {0,1,1,1,0}
-        };
+        float[] input7 = {1,1,1,1,1,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0};
 
-        float[][] input6 = {
-            {0,1,1,1,0},
-            {1,0,0,0,1},
-            {1,0,0,0,0},
-            {1,0,0,0,0},
-            {1,1,1,1,0},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {0,1,1,1,0}
-        };
+        float[] input8 = {0,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,0};
 
-        float[][] input7 = {
-            {1,1,1,1,1},
-            {0,0,0,0,1},
-            {0,0,0,1,0},
-            {0,0,0,1,0},
-            {0,0,1,0,0},
-            {0,0,1,0,0},
-            {0,1,0,0,0},
-            {0,1,0,0,0},
-            {0,1,0,0,0}
-        };
-
-        float[][] input8 = {
-            {0,1,1,1,0},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {0,1,1,1,0},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {0,1,1,1,0}
-        };
-
-        float[][] input9 = {
-            {0,1,1,1,0},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {1,0,0,0,1},
-            {0,1,1,1,1},
-            {0,0,0,0,1},
-            {0,0,0,0,1},
-            {1,0,0,0,1},
-            {0,1,1,1,0}
-        };
+        float[] input9 = {0,1,1,1,0,1,0,0,0,1,1,0,0,0,1,1,0,0,0,1,0,1,1,1,1,0,0,0,0,1,0,0,0,0,1,1,0,0,0,1,0,1,1,1,0};
 
         float[] expectedOutput0 = new float[] {1,0,0,0,0,0,0,0,0,0};
         float[] expectedOutput1 = new float[] {0,1,0,0,0,0,0,0,0,0};
@@ -219,7 +127,7 @@ public class App {
         		for(int k = 0; k < layers[i-1].neurons.length; k++) {
         			sum += layers[i-1].neurons[k].value*layers[i].neurons[j].weights[k];
         		}
-        		//sum += layers[i].neurons[j].bias; // TODO add in the bias 
+        		sum += layers[i].neurons[j].bias;
         		layers[i].neurons[j].value = StatUtil.Sigmoid(sum);
         	}
         } 	
@@ -293,7 +201,7 @@ public class App {
     public static void train(int training_iterations,float learning_rate) {
     	for(int i = 0; i < training_iterations; i++) {
     		for(int j = 0; j < tDataSet.length; j++) {
-    			forward(tDataSet[j].data);
+                forward(tDataSet[j].data);
     			backward(learning_rate,tDataSet[j]);
     		}
     	}
