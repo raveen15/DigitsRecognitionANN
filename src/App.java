@@ -281,7 +281,7 @@ public class App {
     	for(int i = 0; i < training_iterations; i++) {
     		for(int j = 0; j < tDataSet.length; j++) {
                 forward(tDataSet[j].data);
-    			backward(learning_rate,tDataSet[j]);
+                backward(learning_rate,tDataSet[j]);
     		}
     	}
     }
