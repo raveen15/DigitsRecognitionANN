@@ -8,9 +8,9 @@ public class Layer {
 		for(int i = 0; i < numberNeurons; i++) {
 			float[] weights = new float[inNeurons];
 			for(int j = 0; j < inNeurons; j++) {
-				weights[j] = StatUtil.RandomFloat(Neuron.minWeightValue, Neuron.maxWeightValue);
+				weights[j] = MathFunctions.RandomFloat(Neuron.minWeightValue, Neuron.maxWeightValue);
 			}
-			neurons[i] = new Neuron(weights, StatUtil.RandomFloat(0, 1)); 
+			neurons[i] = new Neuron(weights, MathFunctions.RandomFloat(0, 1)); 
 		}
 	}
 	

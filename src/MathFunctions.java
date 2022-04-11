@@ -1,4 +1,4 @@
-public class StatUtil {
+public class MathFunctions {
 	
 	// Get a random numbers between min and max
     public static float RandomFloat(float min, float max) {

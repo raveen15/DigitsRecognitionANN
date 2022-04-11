@@ -26,7 +26,7 @@ public class App {
         }
        
         //Backpropagtion algorithm
-        train(100000, 0.05f);
+        train(100000, 0.1f);
 
         //Outputs after training with digits 0-9
         System.out.println("============");
@@ -297,7 +297,7 @@ public class App {
         			sum += layers[i-1].neurons[k].value*layers[i].neurons[j].weights[k];
         		}
         		sum += layers[i].neurons[j].bias;
-        		layers[i].neurons[j].value = StatUtil.Sigmoid(sum);
+        		layers[i].neurons[j].value = MathFunctions.Sigmoid(sum);
         	}
         } 	
     }
