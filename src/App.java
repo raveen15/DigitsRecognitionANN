@@ -3,14 +3,8 @@ public class App {
     static TrainingData[] tDataSet;
    
     public static void main(String[] args) {
-    	// My changes
-        // Set the Min and Max weight value for all Neurons
     	Neuron.setRangeWeight(0,1);
     	
-    	// Create the layers
-    	// Notes: One thing you didn't code right is that neurons in a layer
-    	// need to have number of weights corresponding to the previous layer
-    	// which means that the first hidden layer need to have 2 weights per neuron and 6 neurons
     	layers = new Layer[3];
     	layers[0] = null; // Input Layer 0,45
     	layers[1] = new Layer(45,5); // Hidden Layer 45,5
@@ -19,6 +13,7 @@ public class App {
     	// Create the training data
     	CreateTrainingData();
     	
+        //Output before training
         System.out.println("============");
         System.out.println("Output before training");
         System.out.println("============");
@@ -30,8 +25,10 @@ public class App {
             }
         }
        
+        //Backpropagtion algorithm
         train(100000, 0.05f);
 
+        //Outputs after training with digits 0-9
         System.out.println("============");
         System.out.println("Output after training");
         System.out.println("============");
@@ -42,6 +39,8 @@ public class App {
                 System.out.println(j + ": " + layers[2].neurons[j].value);
             }
         }
+
+        //30 test cases, three for each digit
         float[] inputZeroTestOne = {0,1,0,1,0,1,0,0,0,1,1,0,0,0,0,1,0,0,0,1,1,0,0,0,1,0,0,0,0,1,1,0,0,0,1,1,0,0,1,1,0,1,1,1,0};
         forward(inputZeroTestOne);
         System.out.println("\n===Zero Test With Noise ===");
@@ -277,6 +276,15 @@ public class App {
         tDataSet[8] = new TrainingData(input8, expectedOutput8);
         tDataSet[9] = new TrainingData(input9, expectedOutput9);       
     }
+
+    public static void train(int training_iterations,float learning_rate) {
+    	for(int i = 0; i < training_iterations; i++) {
+    		for(int j = 0; j < tDataSet.length; j++) {
+                forward(tDataSet[j].data);
+    			backward(learning_rate,tDataSet[j]);
+    		}
+    	}
+    }
     
     public static void forward(float[] inputs) {
     	
@@ -294,11 +302,6 @@ public class App {
         } 	
     }
     
-    // This part is heavily inspired from the website in the first note.
-    // The idea is that you calculate a gradient and cache the updated weights in the neurons.
-    // When ALL the neurons new weight have been calculated we refresh the neurons.
-    // Meaning we do the following:
-    // Calculate the output layer weights, calculate the hidden layer weight then update all the weights
     public static void backward(float learning_rate,TrainingData tData) {
     	
     	int number_layers = layers.length;
@@ -355,14 +358,5 @@ public class App {
     		gradient_sum += current_neuron.weights[n_index]*current_neuron.gradient;
     	}
     	return gradient_sum;
-    }
- 
-    public static void train(int training_iterations,float learning_rate) {
-    	for(int i = 0; i < training_iterations; i++) {
-    		for(int j = 0; j < tDataSet.length; j++) {
-                forward(tDataSet[j].data);
-    			backward(learning_rate,tDataSet[j]);
-    		}
-    	}
     }
 }
